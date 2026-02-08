@@ -1,0 +1,196 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Happy 27th Birthday Veronica</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body{
+      margin:0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(135deg,#1e293b,#0f172a);
+      color:#0f172a;
+    }
+
+    .wrap{
+      max-width:720px;
+      margin:0 auto;
+      padding:20px;
+    }
+
+    .page{
+      display:none;
+      background:#ffffff;
+      border-radius:18px;
+      padding:22px;
+      box-shadow:0 15px 40px rgba(0,0,0,.25);
+      min-height:60vh;
+    }
+
+    .page.active{
+      display:block;
+    }
+
+    h1{font-size:32px;margin:0 0 10px}
+    h2{font-size:22px;margin:0 0 8px}
+    p{font-size:16px;line-height:1.5;margin:6px 0}
+
+    .big{
+      font-size:26px;
+      font-weight:bold;
+      margin-top:8px;
+    }
+
+    .tag{
+      display:inline-block;
+      padding:6px 12px;
+      border-radius:999px;
+      font-size:13px;
+      font-weight:bold;
+      margin-top:8px;
+    }
+
+    .good{background:#dcfce7;color:#166534}
+    .warn{background:#fef3c7;color:#92400e}
+
+    .actions{
+      display:flex;
+      justify-content:space-between;
+      margin-top:18px;
+    }
+
+    button{
+      border:none;
+      border-radius:999px;
+      padding:12px 18px;
+      font-size:14px;
+      font-weight:bold;
+      cursor:pointer;
+    }
+
+    .next{
+      background:#7c3aed;
+      color:white;
+    }
+
+    .back{
+      background:#e5e7eb;
+      color:#111827;
+    }
+  </style>
+</head>
+
+<body>
+<div class="wrap">
+
+  <!-- PAGE 1 -->
+  <div class="page active">
+    <h1>🎉 Happy 27th Birthday, Veronica 🎂</h1>
+    <p>
+      This is a little click-through money postcard.
+      Honest, supportive, and made with love.
+    </p>
+
+    <div class="actions">
+      <span></span>
+      <button class="next">Start →</button>
+    </div>
+  </div>
+
+  <!-- PAGE 2 -->
+  <div class="page">
+    <h2>Something you’ve already proven</h2>
+    <div class="big">Debt discipline</div>
+    <span class="tag good">real skill</span>
+
+    <p>
+      You’ve paid debt down properly before.
+      That matters. It means this situation is solvable.
+    </p>
+
+    <div class="actions">
+      <button class="back">← Back</button>
+      <button class="next">Next →</button>
+    </div>
+  </div>
+
+  <!-- PAGE 3 -->
+  <div class="page">
+    <h2>Food 🍽️ (this is actually great)</h2>
+    <div class="big">$300–$400 per month</div>
+    <span class="tag good">~$10–$13 per day</span>
+
+    <p>
+      Efficient. Normal. Healthy.
+      This is not a problem category at all.
+    </p>
+
+    <div class="actions">
+      <button class="back">← Back</button>
+      <button class="next">Next →</button>
+    </div>
+  </div>
+
+  <!-- PAGE 4 -->
+  <div class="page">
+    <h2>The quiet stack 🛍️</h2>
+    <div class="big">$1,100–$1,300 per month</div>
+    <span class="tag warn">adds up quietly</span>
+
+    <p>
+      Not big splurges — just frequent small shopping moments.
+      This is the main lever.
+    </p>
+
+    <div class="actions">
+      <button class="back">← Back</button>
+      <button class="next">Next →</button>
+    </div>
+  </div>
+
+  <!-- PAGE 5 -->
+  <div class="page">
+    <h2>The upside 💜</h2>
+    <div class="big">$1,000–$1,500 per month</div>
+    <span class="tag good">possible savings</span>
+
+    <p>
+      No extreme cuts required.
+      Just fewer shopping days.
+    </p>
+
+    <p>
+      Spend less on stuff, keep more for fun.
+      Happy Birthday ❤️
+    </p>
+
+    <div class="actions">
+      <button class="back">← Back</button>
+      <button class="next">Restart ↺</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  const pages = document.querySelectorAll('.page');
+  let index = 0;
+
+  function show(i){
+    pages[index].classList.remove('active');
+    index = (i + pages.length) % pages.length;
+    pages[index].classList.add('active');
+  }
+
+  document.querySelectorAll('.next').forEach(btn=>{
+    btn.addEventListener('click',()=>show(index+1));
+  });
+
+  document.querySelectorAll('.back').forEach(btn=>{
+    btn.addEventListener('click',()=>show(index-1));
+  });
+</script>
+
+</body>
+</html>
