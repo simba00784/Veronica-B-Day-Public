@@ -6,77 +6,244 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
-    body{
-      margin:0;
-      font-family: Arial, Helvetica, sans-serif;
-      background: linear-gradient(135deg,#1e293b,#0f172a);
-      color:#0f172a;
+    * {
+      box-sizing: border-box;
     }
 
-    .wrap{
-      max-width:720px;
-      margin:0 auto;
-      padding:20px;
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #1a1a2e;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    .page{
-      display:none;
-      background:#ffffff;
-      border-radius:18px;
-      padding:22px;
-      box-shadow:0 15px 40px rgba(0,0,0,.25);
-      min-height:60vh;
+    .wrap {
+      max-width: 520px;
+      width: 100%;
+      padding: 20px;
     }
 
-    .page.active{
-      display:block;
+    .page {
+      display: none;
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 48px 36px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      min-height: 480px;
+      position: relative;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
     }
 
-    h1{font-size:32px;margin:0 0 10px}
-    h2{font-size:22px;margin:0 0 8px}
-    p{font-size:16px;line-height:1.5;margin:6px 0}
-
-    .big{
-      font-size:26px;
-      font-weight:bold;
-      margin-top:8px;
+    .page.active {
+      display: block;
+      animation: fadeIn 0.5s ease forwards;
     }
 
-    .tag{
-      display:inline-block;
-      padding:6px 12px;
-      border-radius:999px;
-      font-size:13px;
-      font-weight:bold;
-      margin-top:8px;
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
-    .good{background:#dcfce7;color:#166534}
-    .warn{background:#fef3c7;color:#92400e}
-
-    .actions{
-      display:flex;
-      justify-content:space-between;
-      margin-top:18px;
+    .progress {
+      position: absolute;
+      top: 16px;
+      left: 36px;
+      right: 36px;
+      height: 4px;
+      background: #e5e7eb;
+      border-radius: 999px;
+      overflow: hidden;
     }
 
-    button{
-      border:none;
-      border-radius:999px;
-      padding:12px 18px;
-      font-size:14px;
-      font-weight:bold;
-      cursor:pointer;
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, #667eea, #764ba2);
+      border-radius: 999px;
+      transition: width 0.3s ease;
     }
 
-    .next{
-      background:#7c3aed;
-      color:white;
+    .content {
+      margin-top: 32px;
     }
 
-    .back{
-      background:#e5e7eb;
-      color:#111827;
+    h1 {
+      font-size: 36px;
+      margin: 0 0 16px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.2;
+    }
+
+    h2 {
+      font-size: 28px;
+      margin: 0 0 12px;
+      color: #1a1a2e;
+      line-height: 1.3;
+    }
+
+    p {
+      font-size: 17px;
+      line-height: 1.6;
+      margin: 12px 0;
+      color: #4a5568;
+    }
+
+    .big {
+      font-size: 42px;
+      font-weight: 700;
+      margin: 16px 0;
+      color: #1a1a2e;
+      letter-spacing: -0.5px;
+    }
+
+    .subtitle {
+      font-size: 15px;
+      color: #718096;
+      margin-top: -8px;
+      margin-bottom: 16px;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 600;
+      margin-top: 12px;
+    }
+
+    .good {
+      background: #d1fae5;
+      color: #065f46;
+    }
+
+    .warn {
+      background: #fef3c7;
+      color: #92400e;
+    }
+
+    .highlight {
+      background: #ede9fe;
+      color: #5b21b6;
+    }
+
+    .stat-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .stat-row:last-child {
+      border-bottom: none;
+    }
+
+    .stat-label {
+      font-size: 15px;
+      color: #6b7280;
+    }
+
+    .stat-value {
+      font-size: 20px;
+      font-weight: 700;
+      color: #1a1a2e;
+    }
+
+    .actions {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 36px;
+      gap: 12px;
+    }
+
+    button {
+      border: none;
+      border-radius: 999px;
+      padding: 14px 28px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      flex: 1;
+    }
+
+    button:active {
+      transform: scale(0.98);
+    }
+
+    .next {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      box-shadow: 0 4px 14px rgba(102, 126, 234, 0.4);
+    }
+
+    .next:hover {
+      box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+    }
+
+    .back {
+      background: #f3f4f6;
+      color: #374151;
+    }
+
+    .back:hover {
+      background: #e5e7eb;
+    }
+
+    .emoji {
+      font-size: 48px;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .breakdown {
+      background: #f9fafb;
+      border-radius: 16px;
+      padding: 20px;
+      margin: 20px 0;
+    }
+
+    .breakdown-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      font-size: 15px;
+    }
+
+    .breakdown-label {
+      color: #6b7280;
+    }
+
+    .breakdown-value {
+      font-weight: 600;
+      color: #1a1a2e;
+    }
+
+    .card-note {
+      background: #fffbeb;
+      border-left: 4px solid #f59e0b;
+      padding: 16px;
+      margin: 20px 0;
+      border-radius: 8px;
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    .intro-text {
+      font-size: 18px;
+      color: #4a5568;
+      line-height: 1.7;
     }
   </style>
 </head>
@@ -84,30 +251,41 @@
 <body>
 <div class="wrap">
 
-  <!-- PAGE 1 -->
+  <!-- PAGE 1: INTRO -->
   <div class="page active">
-    <h1>🎉 Happy 27th Birthday, Veronica 🎂</h1>
-    <p>
-      This is a little click-through money postcard.
-      Honest, supportive, and made with love.
-    </p>
+    <div class="progress">
+      <div class="progress-bar" style="width: 0%"></div>
+    </div>
+    <div class="content">
+      <h1>🎉 Happy 27th Birthday, Veronica 🎂</h1>
+      <p class="intro-text">
+        Quick financial snapshot—honest and supportive.
+        <br>Built with care.
+      </p>
+    </div>
 
     <div class="actions">
       <span></span>
-      <button class="next">Start →</button>
+      <button class="next">Let's go →</button>
     </div>
   </div>
 
-  <!-- PAGE 2 -->
+  <!-- PAGE 2: PROVEN SKILL -->
   <div class="page">
-    <h2>Something you’ve already proven</h2>
-    <div class="big">Debt discipline</div>
-    <span class="tag good">real skill</span>
+    <div class="progress">
+      <div class="progress-bar" style="width: 20%"></div>
+    </div>
+    <div class="content">
+      <span class="emoji">💪</span>
+      <h2>You've done this before</h2>
+      <div class="big">Debt discipline</div>
+      <span class="tag good">proven track record</span>
 
-    <p>
-      You’ve paid debt down properly before.
-      That matters. It means this situation is solvable.
-    </p>
+      <p>
+        You've successfully paid down debt in the past. That's not luck—it's capability.
+        This current situation is entirely solvable.
+      </p>
+    </div>
 
     <div class="actions">
       <button class="back">← Back</button>
@@ -115,16 +293,26 @@
     </div>
   </div>
 
-  <!-- PAGE 3 -->
+  <!-- PAGE 3: FOOD -->
   <div class="page">
-    <h2>Food 🍽️ (this is actually great)</h2>
-    <div class="big">$300–$400 per month</div>
-    <span class="tag good">~$10–$13 per day</span>
+    <div class="progress">
+      <div class="progress-bar" style="width: 40%"></div>
+    </div>
+    <div class="content">
+      <span class="emoji">🍽️</span>
+      <h2>Food spending</h2>
+      <div class="big">$300–$400/mo</div>
+      <span class="tag good">~$10–$13 per day</span>
 
-    <p>
-      Efficient. Normal. Healthy.
-      This is not a problem category at all.
-    </p>
+      <p>
+        This is efficient and healthy. Zero concern here.
+        Most people spend significantly more on food.
+      </p>
+
+      <div class="card-note">
+        This category doesn't need attention. It's already optimized.
+      </div>
+    </div>
 
     <div class="actions">
       <button class="back">← Back</button>
@@ -132,16 +320,37 @@
     </div>
   </div>
 
-  <!-- PAGE 4 -->
+  <!-- PAGE 4: SHOPPING PATTERN -->
   <div class="page">
-    <h2>The quiet stack 🛍️</h2>
-    <div class="big">$1,100–$1,300 per month</div>
-    <span class="tag warn">adds up quietly</span>
+    <div class="progress">
+      <div class="progress-bar" style="width: 60%"></div>
+    </div>
+    <div class="content">
+      <span class="emoji">🛍️</span>
+      <h2>Shopping pattern</h2>
+      <div class="big">$1,100–$1,300/mo</div>
+      <span class="tag warn">accumulates quietly</span>
 
-    <p>
-      Not big splurges — just frequent small shopping moments.
-      This is the main lever.
-    </p>
+      <p>
+        Not large purchases—mostly small, frequent transactions.
+        These add up without feeling significant in the moment.
+      </p>
+
+      <div class="breakdown">
+        <div class="breakdown-item">
+          <span class="breakdown-label">Daily average</span>
+          <span class="breakdown-value">~$37–$43</span>
+        </div>
+        <div class="breakdown-item">
+          <span class="breakdown-label">Weekly average</span>
+          <span class="breakdown-value">~$260–$300</span>
+        </div>
+      </div>
+
+      <p style="margin-top: 16px; font-weight: 500;">
+        This is the main lever for improvement.
+      </p>
+    </div>
 
     <div class="actions">
       <button class="back">← Back</button>
@@ -149,25 +358,85 @@
     </div>
   </div>
 
-  <!-- PAGE 5 -->
+  <!-- PAGE 5: OPPORTUNITY -->
   <div class="page">
-    <h2>The upside 💜</h2>
-    <div class="big">$1,000–$1,500 per month</div>
-    <span class="tag good">possible savings</span>
+    <div class="progress">
+      <div class="progress-bar" style="width: 80%"></div>
+    </div>
+    <div class="content">
+      <span class="emoji">💜</span>
+      <h2>The opportunity</h2>
+      <div class="big">$1,000–$1,500/mo</div>
+      <span class="tag highlight">potential monthly savings</span>
 
-    <p>
-      No extreme cuts required.
-      Just fewer shopping days.
-    </p>
+      <p>
+        Cutting shopping by 50–70% would unlock substantial monthly margin.
+        No extreme lifestyle changes required.
+      </p>
 
-    <p>
-      Spend less on stuff, keep more for fun.
-      Happy Birthday ❤️
-    </p>
+      <div class="breakdown">
+        <div class="breakdown-item">
+          <span class="breakdown-label">Current shopping</span>
+          <span class="breakdown-value">$1,100–$1,300</span>
+        </div>
+        <div class="breakdown-item">
+          <span class="breakdown-label">Target shopping</span>
+          <span class="breakdown-value">$300–$500</span>
+        </div>
+        <div class="breakdown-item">
+          <span class="breakdown-label">Freed up monthly</span>
+          <span class="breakdown-value">$600–$1,000</span>
+        </div>
+      </div>
+
+      <p style="margin-top: 20px; font-weight: 500;">
+        Fewer shopping days. Same quality of life. More breathing room.
+      </p>
+    </div>
 
     <div class="actions">
       <button class="back">← Back</button>
-      <button class="next">Restart ↺</button>
+      <button class="next">Next →</button>
+    </div>
+  </div>
+
+  <!-- PAGE 6: SUMMARY -->
+  <div class="page">
+    <div class="progress">
+      <div class="progress-bar" style="width: 100%"></div>
+    </div>
+    <div class="content">
+      <span class="emoji">✨</span>
+      <h2>Bottom line</h2>
+
+      <div class="stat-row">
+        <span class="stat-label">Food budget</span>
+        <span class="stat-value" style="color: #059669;">Optimized ✓</span>
+      </div>
+
+      <div class="stat-row">
+        <span class="stat-label">Shopping frequency</span>
+        <span class="stat-value" style="color: #d97706;">High volume</span>
+      </div>
+
+      <div class="stat-row">
+        <span class="stat-label">Savings potential</span>
+        <span class="stat-value" style="color: #7c3aed;">$1k–$1.5k/mo</span>
+      </div>
+
+      <p style="margin-top: 24px; font-size: 18px; line-height: 1.6;">
+        You already know how to manage money effectively. 
+        Just redirect that discipline toward shopping frequency.
+      </p>
+
+      <p style="margin-top: 16px; font-size: 18px; font-weight: 600; color: #764ba2;">
+        Happy Birthday ❤️
+      </p>
+    </div>
+
+    <div class="actions">
+      <button class="back">← Back</button>
+      <button class="next">Restart ↻</button>
     </div>
   </div>
 
@@ -177,18 +446,25 @@
   const pages = document.querySelectorAll('.page');
   let index = 0;
 
-  function show(i){
+  function show(i) {
     pages[index].classList.remove('active');
     index = (i + pages.length) % pages.length;
     pages[index].classList.add('active');
+    window.scrollTo(0, 0);
   }
 
-  document.querySelectorAll('.next').forEach(btn=>{
-    btn.addEventListener('click',()=>show(index+1));
+  document.querySelectorAll('.next').forEach(btn => {
+    btn.addEventListener('click', () => show(index + 1));
   });
 
-  document.querySelectorAll('.back').forEach(btn=>{
-    btn.addEventListener('click',()=>show(index-1));
+  document.querySelectorAll('.back').forEach(btn => {
+    btn.addEventListener('click', () => show(index - 1));
+  });
+
+  // Keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight') show(index + 1);
+    if (e.key === 'ArrowLeft') show(index - 1);
   });
 </script>
 
